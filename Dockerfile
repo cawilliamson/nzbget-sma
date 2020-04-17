@@ -1,11 +1,24 @@
 FROM linuxserver/nzbget:latest
 
-RUN apk add ffmpeg git py-pip
+# install dependencies
+RUN apk add git py-pip
 
+# install mp4-automator
 RUN git clone --depth=1 https://github.com/mdhiggins/sickbeard_mp4_automator.git /mp4-automator
 
+# install mp4-automator dependencies
 RUN pip install --upgrade enum34 pip setuptools
 RUN pip install -r /mp4-automator/setup/requirements.txt
 
+# fix mp4-automator permissions
 RUN find /mp4-automator -type d -exec chmod 777 {} \;
 RUN find /mp4-automator -type f -exec chmod 666 {} \;
+
+# install ffmpeg
+RUN wget https://johnvansickle.com/ffmpeg/builds/ffmpeg-git-amd64-static.tar.xz -O /var/tmp/ffmpeg.tar.xz && \
+  tar -xJf /var/tmp/ffmpeg.tar.xz -C /usr/local/bin --strip-components 1 && \
+  chgrp users /usr/local/bin/ffmpeg && \
+  chgrp users /usr/local/bin/ffprobe && \
+  chmod g+x /usr/local/bin/ffmpeg && \
+  chmod g+x /usr/local/bin/ffprobe && \
+  rm -rf /var/tmp/ffmpeg.tar.xz

@@ -1,6 +1,6 @@
 FROM linuxserver/nzbget:latest
 
-RUN apk add ffmpeg git
+RUN apk add ffmpeg git py-pip
 
 RUN git clone --depth=1 https://github.com/mdhiggins/sickbeard_mp4_automator.git /mp4-automator
 

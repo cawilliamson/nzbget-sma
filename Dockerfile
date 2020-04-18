@@ -22,3 +22,7 @@ RUN wget https://johnvansickle.com/ffmpeg/builds/ffmpeg-git-amd64-static.tar.xz 
   chmod g+x /usr/local/bin/ffmpeg && \
   chmod g+x /usr/local/bin/ffprobe && \
   rm -rf /var/tmp/ffmpeg.tar.xz
+
+# symlink autoprocess config
+RUN rm -f /mp4-automator/config/autoProcess.ini && \
+  ln -sf /config/autoProcess.ini /mp4-automator/config/autoProcess.ini

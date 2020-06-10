@@ -7,7 +7,7 @@ RUN apk add git python2 py-pip
 RUN git clone --depth=1 https://github.com/mdhiggins/sickbeard_mp4_automator.git /mp4-automator
 
 # install mp4-automator dependencies
-RUN pip install --upgrade enum34 pip setuptools
+RUN pip install --upgrade enum34 pip requests setuptools
 RUN pip install -r /mp4-automator/setup/requirements.txt
 
 # fix mp4-automator permissions

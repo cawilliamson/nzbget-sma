@@ -1,7 +1,7 @@
 FROM linuxserver/nzbget:latest
 
 # install dependencies
-RUN apk add git python py-pip
+RUN apk add git python2 py-pip
 
 # install mp4-automator
 RUN git clone --depth=1 https://github.com/mdhiggins/sickbeard_mp4_automator.git /mp4-automator
